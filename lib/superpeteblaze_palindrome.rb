@@ -1,8 +1,6 @@
 require "superpeteblaze_palindrome/version"
 
-# Monkey Patches the String class
-class String
-
+module SuperPeteBlazePalindrome
   # Returns true for a palindrome, false otherwise
   def palindrome?
     processed_content == processed_content.reverse
@@ -12,7 +10,16 @@ class String
 
     # Returns content for palindrome testing
     def processed_content
-      scan(/[a-z]/i).join.downcase
+      to_s.scan(/[a-z0-9]/i).join.downcase
     end
+end
 
+# Monkey Patches the String class
+class String
+  include SuperPeteBlazePalindrome
+end
+
+# Monkey Patches the String class
+class Integer
+  include SuperPeteBlazePalindrome
 end
